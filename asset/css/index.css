@@ -1,0 +1,13 @@
+/* Global */
+main{
+    margin-top: 65px;
+}
+
+.bg-blue{
+    background-color: #4d68b4;
+}
+
+/* Navbar */
+.nav-img{
+    height: 40px;
+}
