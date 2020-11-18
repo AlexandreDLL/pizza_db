@@ -29,7 +29,7 @@ class App {
         //     content = resp;
         //     $('main').hide().html(content).fadeIn();
         // });
-        // Rest.update('user', {id: 1, active: 0, nom: 'testU'}).done((resp) => {
+        // Rest.update('user', {id: 1, active: 1, nom: 'TestU2'}).done((resp) => {
         //     content = resp;
         //     $('main').hide().html(content).fadeIn();
         // });

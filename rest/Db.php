@@ -92,20 +92,25 @@ class Db {
         return $resp;
     }
 
-    public static function update($table, $params){
+    public static function update($table, $value){
         $set = "";
         $where = null;
-        foreach($params as $k => $v){
+        $params = [];
+        $id = null;
+        foreach($value as $k => $v){
             if($k == 'id'){
-                $where = "$k = $v";
+                $where = "$k = ?";
+                $id = $v;
             }
             else{
-                $set .= "$k = '".$v."',";
+                $set .= "$k = ?,";
+                $params[] = $v;
             }
         }
+        $params[] = $id;
         $set = trim($set, ',');
         $sql = "UPDATE $table SET $set WHERE $where";
-        $resp = self::query($sql);
+        $resp = self::query($sql, $params);
         return $resp;
     }
 
