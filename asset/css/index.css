@@ -7,7 +7,20 @@ main{
     background-color: #4d68b4;
 }
 
+.box-shadow{
+    box-shadow: 1px 3px 8px black;
+}
+
 /* Navbar */
 .nav-img{
     height: 40px;
+}
+
+.link-white{
+    color: whitesmoke !important;
+}
+
+.link-white:hover{
+    color: whitesmoke !important;
+    -webkit-text-stroke: 0.25px red;
 }
