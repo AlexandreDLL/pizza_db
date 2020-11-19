@@ -1,6 +1,7 @@
 class App {
 
     static paramsSelect = { id: null, where: null, orderBy: null };
+    static datas = {};
 
     static init() {
         window.onpopstate = () => {
@@ -20,11 +21,15 @@ class App {
         let hash = (window.location.hash || '#accueil').substring(1);
         let page = hash.split('/')[0];
         let table = hash.split('/')[1];
-        let content;
-        // Rest.select('product', App.paramsSelect).done((resp) => {
-        //     content = resp;
-        //     $('main').hide().html(content).fadeIn();
-        // });
+        Rest.select('product', App.paramsSelect).done((resp) => {
+            let json = resp.tryJsonParse();
+            let arr = [];
+            for(let obj of json){
+                arr.push(new Product(obj));
+            }
+            App.datas['product'] = arr;
+            $('main').hide().html(App.datas.product).fadeIn();
+        });
         // Rest.insert('user', {active: 1, nom: 'Test', email: 'test@test.fr'}).done((resp) => {
         //     content = resp;
         //     $('main').hide().html(content).fadeIn();

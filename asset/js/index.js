@@ -1,1 +1,4 @@
-App.init();
+$(document).ready(() => {
+    Utils.init();
+    App.init();
+})
