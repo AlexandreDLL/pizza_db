@@ -65,9 +65,8 @@ class Db {
         if(isset($orderBy)){
             $sql .= " ORDER BY $orderBy";
         }
-
         $resp = self::query($sql, $params);
-        $data = self::$stmt->fetchAll();
+        $data = self::$stmt->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($data);
     }
 
