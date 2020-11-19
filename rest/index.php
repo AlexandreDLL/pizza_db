@@ -13,7 +13,8 @@ switch($_SERVER['REQUEST_METHOD']){
         echo Db::select($table, $_get['params']);
         break;
     case 'POST':
-        $_post = validate_request($_POST);
+        $_post = json_decode(file_get_contents('php://input'), true);
+        $_post = validate_request($_post);
         $table = isset($_post['table']) ? $_post['table'] : null;
         if(!isset($table)){
             echo false;

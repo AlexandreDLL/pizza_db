@@ -2,8 +2,8 @@
 
 class Db {
 
-    static $db = null;
-    static $stmt;
+    private static $db = null;
+    private static $stmt;
 
     private static function getDb(){
         if(!isset(self::$db)){
@@ -34,9 +34,8 @@ class Db {
     public static function select($table, $params){
         $id = $params['id'];
         $pWhere = $params['where'];
-        $order = $params['orderBy'];
+        $orderBy = $params['orderBy'];
         $where = null;
-        $orderBy = null;
         $params = [];
 
         // Construction des conditions
@@ -53,16 +52,13 @@ class Db {
             }
             $params[] = $pWhere['value'];
         }
-        if(!empty($order)){
-            $orderBy = "$order ASC";
-        }
 
         // Construction de la requête
         $sql = "SELECT * FROM $table";
         if(isset($where)){
             $sql .= " WHERE $where";
         }
-        if(isset($orderBy)){
+        if(!empty($orderBy)){
             $sql .= " ORDER BY $orderBy";
         }
 
