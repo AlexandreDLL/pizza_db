@@ -28,14 +28,26 @@ class App {
         App.test();
     }
 
-    static loadClass(){
+    static loadClass() {
         let deferred = $.Deferred();
         let _classes = $.map(App.classes, (cl) => {
-            return $.getScript(`app/${cl}.js`);
+            return App.getScript(`app/${cl}.js`);
         })
         $.when.apply($, _classes).then(() => {
             deferred.resolve();
         })
+        return deferred.promise();
+    }
+
+    static getScript(scriptUrl) {
+        let deferred = $.Deferred();
+        let script = document.createElement('script');
+        script.src = scriptUrl;
+        script.defer = true;
+        script.onload = function () {
+            deferred.resolve();
+        }
+        document.body.appendChild(script);
         return deferred.promise();
     }
 
