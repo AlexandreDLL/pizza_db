@@ -2,8 +2,8 @@
 
 class Db {
 
-    static $db = null;
-    static $stmt;
+    private static $db = null;
+    private static $stmt;
 
     private static function getDb(){
         if(!isset(self::$db)){
@@ -14,6 +14,7 @@ class Db {
             }
             catch(PDOException $e){
                 var_dump($e);
+                exit();
             }
         }
         return self::$db;
@@ -27,6 +28,7 @@ class Db {
         }
         catch(PDOException $e){
             var_dump($e);
+            exit();
         }
         return $resp;
     }
