@@ -58,7 +58,7 @@ class App {
     }
 
     static test() {
-        let product = new Product({ active: false, category_id: 3, title: 'ABC', description: 'DEF', price: 10.5, onsale: false, ord: 100 });
+        let product = new Product({ id: 160, active: false, category_id: 3, title: 'ABC', description: 'DEF', price: 10.5, onsale: false, ord: 100 });
         product.insert().done((resp) => {
             console.log(resp);
             product.title = 'ABCZ';

@@ -78,9 +78,11 @@ class Db {
         $params = [];
         if(isset($value)){
             foreach($value as $k => $v){
-                $columns .= "$k,";
-                $val .= "?,";
-                $params[] = $v;
+                if($k != 'id'){
+                    $columns .= "$k,";
+                    $val .= "?,";
+                    $params[] = $v;
+                }
             }
             $columns = trim($columns, ',');
             $val = trim($val, ',');
