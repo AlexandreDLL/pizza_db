@@ -90,7 +90,10 @@ class Db {
             $sql = "INSERT INTO $table (id) VALUES (null)";
         }
         $resp = self::query($sql, $params);
-        return $resp;
+        if($resp){
+            $resp = self::$db->lastInsertId();
+        }
+        return json_encode($resp);
     }
 
     public static function update($table, $value){
@@ -112,7 +115,7 @@ class Db {
         $set = trim($set, ',');
         $sql = "UPDATE $table SET $set WHERE $where";
         $resp = self::query($sql, $params);
-        return $resp;
+        return json_encode($resp);
     }
 
     public static function delete($table, $id){
@@ -120,6 +123,6 @@ class Db {
         $params = [];
         $params[] = $id;
         $resp = self::query($sql, $params);
-        return $resp;
+        return json_encode($resp);
     }
 }
