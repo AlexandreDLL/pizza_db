@@ -91,6 +91,8 @@ class Db {
         else{
             $sql = "INSERT INTO $table (id) VALUES (null)";
         }
+        // var_dump($sql);
+        // var_dump($params);
         $resp = self::query($sql, $params);
         if($resp){
             $resp = self::$db->lastInsertId();
