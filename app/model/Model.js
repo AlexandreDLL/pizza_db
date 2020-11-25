@@ -14,6 +14,19 @@ class Model {
         }
     }
 
+    static getObject(json) {
+        let classe = this;
+        let attr = Object.keys(json)[0];
+        let val = json[attr];
+        let arrValue = [];
+        $(classe.list).each((i, elt) => {
+            if (elt[attr] == val) {
+                arrValue.push(elt);
+            }
+        })
+        return arrValue;
+    }
+
     insert() {
         let table = this.constructor.name.toLowerCase();
         let params = this;
@@ -69,7 +82,7 @@ class Model {
         return deferred.promise();
     }
 
-    static select(){
+    static select() {
         let deferred = $.Deferred();
         let classe = this;
         let table = classe.name.toLowerCase();
