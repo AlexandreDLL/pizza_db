@@ -5,6 +5,7 @@ class Product extends Model {
         this.assign(obj);
     }
 
+    static list = [];
     id = 0;
     active = true;
     category_id = 0;

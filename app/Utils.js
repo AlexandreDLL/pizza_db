@@ -11,5 +11,16 @@ class Utils {
             }
             return value;
         }
+
+        String.prototype.tryEval = function(){
+            let value;
+            try{
+                value = eval(this);
+            }
+            catch{
+                console.log('Erreur tryEval not a string', this);
+            }
+            return value;
+        }
     }
 }

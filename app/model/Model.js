@@ -1,7 +1,5 @@
 class Model {
 
-    static datas = {};
-
     assign(obj) {
         for (let v in obj) {
             if (this[v] != undefined && typeof this[v] == 'number') {
@@ -78,11 +76,11 @@ class Model {
         Rest.select(table, App.paramsSelect).done((resp) => {
             let json = resp.tryJsonParse();
             if (json) {
-                let arr = [];
+                classe.list = [];
                 $(json).each((i, elt) => {
-                    arr.push(new classe(elt));
+                    classe.list.push(new classe(elt));
                 })
-                deferred.resolve(arr);
+                deferred.resolve(classe.list);
             }
             else {
                 deferred.reject(resp);

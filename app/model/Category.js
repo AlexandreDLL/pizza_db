@@ -5,6 +5,7 @@ class Category extends Model {
         this.assign(obj);
     }
 
+    static list = [];
     id = 0;
     active = true;
     title = '';

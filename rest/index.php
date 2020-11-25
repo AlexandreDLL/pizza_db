@@ -45,16 +45,3 @@ switch($_SERVER['REQUEST_METHOD']){
         echo Db::delete($table, $id);
         break;
 }
-
-function validate_request($request)
-{
-    foreach ($request as $k => $v) {
-        if(is_array($v)){
-            validate_request($v);
-        }
-        else{
-            $request[$k] = htmlspecialchars(strip_tags(stripslashes(trim($v))));
-        }
-    }
-    return $request;
-}

@@ -1,7 +1,7 @@
 class App {
 
     static paramsSelect = { id: null, where: null, orderBy: null };
-    static classes = ['Utils', 'Rest', 'model/Model'];
+    static classes = ['Utils', 'Rest', 'router/Router', 'model/Model'];
     static extends = ['model/Category', 'model/Product'];
 
     static init() {
@@ -23,9 +23,13 @@ class App {
     static browse() {
         console.clear();
         let hash = (window.location.hash || '#accueil').substring(1);
-        let page = hash.split('/')[0];
-        let table = hash.split('/')[1];
-        App.test();
+        let route = hash.split('/')[0];
+        let id = hash.split('/')[1];
+        // Methode JS
+        Router.start({route, id}).done((view) => {
+            $('main').hide().html(view).fadeIn();
+        })
+        // App.test();
     }
 
     static loadClass() {

@@ -130,3 +130,16 @@ class Db {
         return json_encode($resp);
     }
 }
+
+function validate_request($request)
+{
+    foreach ($request as $k => $v) {
+        if(is_array($v)){
+            validate_request($v);
+        }
+        else{
+            $request[$k] = htmlspecialchars(strip_tags(stripslashes(trim($v))));
+        }
+    }
+    return $request;
+}
