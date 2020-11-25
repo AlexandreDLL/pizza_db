@@ -14,9 +14,10 @@ switch($_SERVER['REQUEST_METHOD']){
         break;
     case 'POST':
         $_post = validate_request($_POST);
+        // var_dump($_post);
         $table = isset($_post['table']) ? $_post['table'] : null;
         if(!isset($table)){
-            echo false;
+            echo json_encode(false);
             break;
         }
         echo Db::insert($table, $_post['params']);
@@ -27,7 +28,7 @@ switch($_SERVER['REQUEST_METHOD']){
         $table = isset($_put['table']) ? $_put['table'] : null;
         $id = isset($_put['params']['id']) ? $_put['params']['id'] : null;
         if(!isset($table) || !isset($id)){
-            echo false;
+            echo json_encode(false);
             break;
         }
         echo Db::update($table, $_put['params']);
@@ -38,7 +39,7 @@ switch($_SERVER['REQUEST_METHOD']){
         $table = isset($_del['table']) ? $_del['table'] : null;
         $id = isset($_del['id']) ? $_del['id'] : null;
         if(!isset($table) || !isset($id)){
-            echo false;
+            echo json_encode(false);
             break;
         }
         echo Db::delete($table, $id);
