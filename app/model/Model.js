@@ -18,13 +18,13 @@ class Model {
         let classe = this;
         let attr = Object.keys(json)[0];
         let val = json[attr];
-        let arrValue = [];
-        $(classe.list).each((i, elt) => {
-            if (elt[attr] == val) {
-                arrValue.push(elt);
-            }
-        })
-        return arrValue;
+        let arrValue = classe.list.filter((row) => row[attr] == val);
+        return arrValue.length > 1 ? arrValue : arrValue[0];
+    }
+
+    static getAll(){
+        let classe = this;
+        return classe.list;
     }
 
     insert() {
