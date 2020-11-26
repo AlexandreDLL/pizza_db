@@ -1,12 +1,15 @@
 <div>
-    <div data-bind="Product.selected" data-name="product">
-        <h1>Fiche de produit: <span data-bind="product.title"></span></h1>
-        <div>
-            <div data-bind="product.price"></div>€
-            <div data-bind="product.description"></div>
-            <div data-bind="product.active"></div>
-            <div data-bind="product.onsale"></div>
-            <div data-bind="product.category.title">Aucune</div>
-        </div>
-    </div>
+    <div>
+        <div class="col-12" data-bind="Product.selected" data-name="product">
+            <div class="col-12">
+                <h4>Fiche produit : <span data-bind="product.title"></span></h4>
+            </div>
+            <div class="col-12 d-flex">
+                <div data-bind="product.price.toFixed(2)"></div>
+                <div class="ml-2" data-bind="product.onsale"></div>
+                <div class="ml-2" data-bind="product.category.title">Aucune</div>
+            </div>
+            <div class="col-12" data-bind="product.description"></div>
+        </div>   
+    </div>  
 </div>

@@ -1,3 +1,38 @@
 <div>
-    <h1>Liste des produits</h1>
+    <div class="col-12">
+        <h4>Liste des produits</h4>
+    </div>
+    <div>
+        <table class="table table-light table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Designation</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Vendu</th>
+                </tr>
+            </thead>
+            <tbody data-bind="Product.list" data-name="product">
+                <tr data-bind="product">
+                    <td>
+                        <span data-bind="product.title"></span>
+                    </td>
+                    <td>
+                        <span data-bind="product.description"></span>
+                    </td>
+                    <td class="d-flex align-items-center">
+                        <span data-bind="product.price.toFixed(2)"></span>
+                        <span>€</span>
+                    </td>
+                    <td>
+                        <span data-bind="product.category.title">Aucune</span>
+                    </td>
+                    <td>
+                        <span data-bind="product.onsale"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
