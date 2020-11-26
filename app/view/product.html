@@ -1,3 +1,12 @@
 <div>
-    <h1>Fiche de produit</h1>
+    <div data-bind="Product.selected" data-name="product">
+        <h1>Fiche de produit: <span data-bind="product.title"></span></h1>
+        <div>
+            <div data-bind="product.price"></div>€
+            <div data-bind="product.description"></div>
+            <div data-bind="product.active"></div>
+            <div data-bind="product.onsale"></div>
+            <div data-bind="product.category.title">Aucune</div>
+        </div>
+    </div>
 </div>

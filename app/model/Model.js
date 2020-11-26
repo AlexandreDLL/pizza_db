@@ -27,6 +27,10 @@ class Model {
         return classe.list;
     }
 
+    static get selected(){
+        return this.list.length == 1 ? this.list[0] : undefined;
+    }
+
     insert() {
         let table = this.constructor.name.toLowerCase();
         let params = this;

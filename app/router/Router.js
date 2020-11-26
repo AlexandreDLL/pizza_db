@@ -25,7 +25,7 @@ class Router {
         let requests = [];
         let deferred = $.Deferred();
         requests.push($.post(`app/view/${view}.html`).done((resp) => {
-            view = resp;
+            view = $(resp);
         }))
         $(data).each((i ,elt) => {
             if(i > 0)

@@ -27,6 +27,7 @@ class App {
         let id = hash.split('/')[1];
         // Methode JS
         Router.start({route, id}).done((view) => {
+            view.render();
             $('main').hide().html(view).fadeIn();
         })
         // App.test();

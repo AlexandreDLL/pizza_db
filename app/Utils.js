@@ -1,26 +1,90 @@
 class Utils {
 
-    static init(){
-        String.prototype.tryJsonParse = function(){
+    static init() {
+        String.prototype.tryJsonParse = function () {
             let value;
-            try{
+            try {
                 value = JSON.parse(this);
             }
-            catch{
+            catch {
                 console.log('Erreur tryJsonParse:', this);
             }
             return value;
         }
 
-        String.prototype.tryEval = function(){
+        String.prototype.tryEval = function (context) {
             let value;
-            try{
-                value = eval(this);
+            let expr = this;
+            if (context) {
+                expr = "context." + expr;
             }
-            catch{
+            try {
+                value = eval(expr);
+            }
+            catch {
                 console.log('Erreur tryEval not a string', this);
             }
             return value;
+        }
+
+        $.fn.storeData = function () {
+            for (let key in $(this).data()) {
+                let json = {};
+                json[key] = $(this).data(key);
+                $(this).removeAttr('data-' + key);
+                $(this).data(json);
+            }
+        }
+
+        // $.fn.render = function () {
+        //     this.storeData();
+        //     let names = $(this).find('[data-name]');
+        //     names.each((index, name) => {
+        //         let classe = $(name).data('name').tryEval();
+        //         let list = classe.list;
+        //         $(list).each((y, obj) => {
+        //             let clone = $(name).clone(true);
+        //             let allDataBind = $(clone).find('[data-bind');
+        //             allDataBind.each((i, elt) => {
+        //                 let value = obj[$(elt).data('bind')];
+        //                 $(elt).append(value);
+        //             })
+        //             $(this).append(elt);
+        //         })
+        //         $(name).hide();
+        //     })
+        // }
+
+        $.fn.render = function (context) {
+            this.storeData();
+            let elt = this;
+            let bind = $(elt).data('bind');
+            if (bind == undefined) {
+                let childs = $(elt).children()
+                $(childs).each((i, child) => {
+                    $(child).render(context);
+                })
+                return;
+            }
+            let exprEval = bind.tryEval(context);
+            if (exprEval != undefined) {
+                if(exprEval instanceof Array){
+                    $()
+                }
+                else if (exprEval instanceof Model) {
+                    $(elt).data({ item: exprEval });
+                    let name = $(elt).data('name') || 'item';
+                    let context = {}
+                    context[name] = exprEval;
+                    let childs = $(elt).children();
+                    $(childs).each((i, child) => {
+                        $(child).render(context);
+                    })
+                }
+                else {
+                    $(elt).html(exprEval);
+                }
+            }
         }
     }
 }
