@@ -1,3 +1,13 @@
 <div>
-    <h1>Fiche de catégorie</h1>
+    <div>
+        <div class="col-12" data-bind="Category.selected" data-name="category">
+            <div class="col-12">
+                <h4>Fiche catégorie : <span data-bind="category.title"></span></h4>
+            </div>
+            <div class="col-12 d-flex">
+                <div class="ml-2" data-bind="category.onsaleBadge"></div>
+            </div>
+            <div class="col-12" data-bind="category.description"></div>
+        </div>   
+    </div>  
 </div>

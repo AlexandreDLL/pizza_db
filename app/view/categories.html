@@ -1,3 +1,29 @@
 <div>
-    <h1>Liste des catégories</h1>
+    <div class="col-12">
+        <h4>Liste des catégories</h4>
+    </div>
+    <div>
+        <table class="table table-light table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Designation</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Vendu</th>
+                </tr>
+            </thead>
+            <tbody data-bind="Category.list" data-name="category">
+                <tr data-bind="category">
+                    <td>
+                        <span data-bind="category.title"></span>
+                    </td>
+                    <td>
+                        <span data-bind="category.description"></span>
+                    </td>
+                    <td>
+                        <span data-bind="category.onsaleBadge"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

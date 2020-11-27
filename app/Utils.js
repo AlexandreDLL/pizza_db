@@ -62,48 +62,50 @@ class Utils {
             if (bind == undefined) {
                 let childs = $(elt).children()
                 $(childs).each((i, child) => {
-                    $(child).render(context);
+                    $(child).render(context)
                 })
                 return;
             }
             let exprEval = bind.tryEval(context);
             if (exprEval != undefined) {
-                if(exprEval instanceof Array){
-                    $(elt).data({list: exprEval});
+                if (exprEval instanceof Array) {
+                    $(elt).data({ list: exprEval })
                     let name = $(elt).data('name') || 'item';
-                    let template = $(elt).findWithData('bind', name);
+                    let template = $(elt).findWithData('bind', name)
                     template.detach();
-                    for(let expr of exprEval){
+                    for (let item of exprEval) {
                         let component = template.clone(true);
-                        context = {};
-                        context[name] = expr;
-                        $(component).render(context);
-                        $(elt).append(component);
+                        context = {}
+                        context[name] = item;
+                        $(component).render(context)
+                        $(elt).append(component)
                     }
                 }
                 else if (exprEval instanceof Model) {
-                    $(elt).data({ item: exprEval });
-                    let name = $(elt).data('name') || 'item';
-                    let context = {}
-                    context[name] = exprEval;
-                    let childs = $(elt).children();
+                    $(elt).data({ item: exprEval })
+                    if (context == undefined) {
+                        let name = $(elt).data('name') || 'item';
+                        context = {}
+                        context[name] = exprEval;
+                    }
+                    let childs = $(elt).children()
                     $(childs).each((i, child) => {
-                        $(child).render(context);
+                        $(child).render(context)
                     })
                 }
                 else {
-                    $(elt).html(exprEval);
+                    $(elt).html(exprEval)
                 }
             }
         }
 
-        $.fn.findWithData = function(data, name){
+        $.fn.findWithData = function (data, name) {
             let elt = $(this);
             let res;
-            if(value != undefined){
-                res = elt.find('*').filter((i, item) => $(item).data(data) == value);
+            if (name != undefined) {
+                res = elt.find('*').filter((i, item) => $(item).data(data) == name);
             }
-            else{
+            else {
                 res = elt.find('*').filter((i, item) => $(item).data(data));
             }
             return res;

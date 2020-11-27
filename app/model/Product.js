@@ -18,4 +18,8 @@ class Product extends Model {
     get category(){
         return Category.getObject({id: this.category_id});
     }
+
+    get onsaleBadge(){
+        return new BoolBadge(this.onsale).render();
+    }
 }

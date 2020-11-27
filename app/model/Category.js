@@ -16,4 +16,8 @@ class Category extends Model {
     get productList(){
         return Product.getAll().filter((product) => product.category_id == this.id);
     }
+
+    get onsaleBadge(){
+        return new BoolBadge(this.onsale).render();
+    }
 }

@@ -3,6 +3,7 @@ class App {
     static paramsSelect = { id: null, where: null, orderBy: null };
     static classes = ['Utils', 'Rest', 'router/Router', 'model/Model'];
     static extends = ['model/Category', 'model/Product'];
+    static components = ['BoolBadge'];
 
     static init() {
         $(document).ready(() => {
@@ -38,7 +39,10 @@ class App {
         let _classes = $.map(App.classes, (cl) => {
             return App.getScript(`app/${cl}.js`);
         })
-        $.when.apply($, _classes).then(() => {
+        let _components = $.map(App.components, (cl) => {
+            return App.getScript(`app/component/${cl}.jsx`);
+        })
+        $.when(_classes, _components).then(() => {
             let _extends = $.map(App.extends, (cl) => {
                 return App.getScript(`app/${cl}.js`);
             })
@@ -54,6 +58,9 @@ class App {
         let script = document.createElement('script');
         script.src = scriptUrl;
         script.defer = true;
+        if(scriptUrl.endsWith('.jsx')){
+            script.type = 'type/babel';
+        }
         script.onload = function () {
             deferred.resolve();
         }
